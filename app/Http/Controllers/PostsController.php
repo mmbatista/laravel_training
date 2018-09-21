@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Post;
 
+use App\Repositories\Posts;
+
 use Carbon\Carbon;
 
 
@@ -18,14 +20,18 @@ class PostsController extends Controller
 
 
 
-    public function index()
+    public function index(Posts $posts)
     {
 
-        $posts = Post::latest()
+      
+        $posts = $posts->all();
+
+
+        /*$posts = Post::latest()
 
             ->filter(request(['month', 'year']))
             ->get();
-
+*/
 
 
     	return view('posts.index', compact('posts'));
